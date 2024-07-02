@@ -1,12 +1,26 @@
-﻿<Window x:Class="hm.MainWindow"
+﻿<Window x:Class="ImageSearchApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:hm"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Image Search App" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="txtSearchQuery" Width="400" Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <Button Content="Search Images" Click="SearchButton_Click" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <ListBox Grid.Row="1" x:Name="lstImageResults" Margin="10" VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <Image Source="{Binding}" Height="150"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
