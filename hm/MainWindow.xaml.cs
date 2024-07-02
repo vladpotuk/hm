@@ -30,7 +30,7 @@ namespace hm
                 string html = await response.Content.ReadAsStringAsync();
                 List<string> bookTitles = ParseTopBooks(html);
 
-                // Додаємо назви книг у список
+                
                 foreach (string title in bookTitles)
                 {
                     BooksListBox.Items.Add(title);
@@ -55,7 +55,7 @@ namespace hm
                 {
                     string booksListHtml = html.Substring(startIndex, endIndex - startIndex);
 
-                    // Парсимо назви книг з списку
+                    
                     int index = 0;
                     while ((startIndex = booksListHtml.IndexOf("<a href=\"/ebooks/", index)) != -1)
                     {
@@ -86,7 +86,7 @@ namespace hm
 
             try
             {
-                // Отримуємо URL для тексту обраної книги
+              
                 string url = $"{GutenbergUrl}/ebooks/search/?query={Uri.EscapeUriString(bookTitle)}";
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
@@ -96,12 +96,12 @@ namespace hm
 
                 if (!string.IsNullOrEmpty(bookTextUrl))
                 {
-                    // Завантажуємо текст книги
+                    
                     response = await httpClient.GetAsync(bookTextUrl);
                     response.EnsureSuccessStatusCode();
 
                     string bookText = await response.Content.ReadAsStringAsync();
-                    // Відображаємо текст книги у відповідній області (наприклад, TextBlock або TextBox)
+                    
                     BookTextBlock.Text = bookText;
                 }
             }
