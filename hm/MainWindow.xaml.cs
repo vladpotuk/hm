@@ -1,24 +1,26 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace hm
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchQuery = txtSearchQuery.Text.Trim();
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                MessageBox.Show("Please enter a search query.");
+                return;
+            }
+
+            string searchUrl = $"https://www.bing.com/search?q={Uri.EscapeDataString(searchQuery)}";
+            webBrowser.Navigate(new Uri(searchUrl));
         }
     }
 }
